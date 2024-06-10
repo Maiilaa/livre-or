@@ -28,15 +28,14 @@ if (isset($_SESSION["login"]) && $_SESSION["login"] == "admin") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $prenom = $_POST["prenom"];
-    $nom = $_POST["nom"];
+    $login = $_POST["login"];
     $password = $_POST["password"];
     $confirm_password = $_POST["confirm_password"];
     $conn = mysqli_connect("localhost", "root", "", "livreor");
 
     if ($password == $confirm_password) {
         
-        $sql = "UPDATE utilisateurs SET prenom='$prenom', nom='$nom', password='$password' WHERE login='$login'";
+        $sql = "UPDATE utilisateurs SET login='$login', password='$password' WHERE login='$login'";
         if (mysqli_query($conn, $sql)) {
             echo "Modifications enregistrées.";
         } else {
