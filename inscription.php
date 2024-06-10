@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($password == $confirm_password) {
         
-        $conn = mysqli_connect("localhost", "root", "", "moduleconnexion");
+        $conn = mysqli_connect("localhost", "root", "", "livreor");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
       
         
-        $sql = "INSERT INTO utilisateurs (login, prenom, nom, password) VALUES ('$login', '$prenom', '$nom', '$password')";
+        $sql = "INSERT INTO utilisateurs (login, password) VALUES ('$login', '$password')";
         if (mysqli_query($conn, $sql)) {
             header("Location: connexion.php");
             exit;
