@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     if ($password == $confirm_password) {
-        
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $conn = mysqli_connect("localhost", "root", "", "livreor");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
-        $sql = "SELECT * FROM utilisateurs WHERE login='$login'";
+        $sql = "INSERT INTO utilisateurs (login, password) VALUES ('$login', '$hashed_password')";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             echo "Erreur : ce login est déjà utilisé. Veuillez choisir un autre login.";

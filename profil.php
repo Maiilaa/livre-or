@@ -23,10 +23,6 @@ if (mysqli_num_rows($result) > 0) {
 
 mysqli_close($conn);
 
-if (isset($_SESSION["login"]) && $_SESSION["login"] == "admin") {
-    echo '<a href="./admin.php">Accéder à la page admin</a>';
-}
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST["login"];
     $password = $_POST["password"];

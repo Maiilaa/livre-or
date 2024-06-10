@@ -11,18 +11,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     
-    $sql = "SELECT * FROM utilisateurs WHERE login='$login' AND password='$password'";
+    $sql = "SELECT * FROM utilisateurs WHERE login='$login'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $hashed_password = $row['password'];
         
-        session_start();
-        $_SESSION["login"] = $login;
-        header("Location: profil.php");
-        exit;
+        if (password_verify($password, $hashed_password)) {
+            session_start();
+            $_SESSION["login"] = $login;
+            header("Location: profil.php");
+            exit;
+        } else {
+            echo "Erreur de connexion.";
+        }
     } else {
         echo "Erreur de connexion.";
     }
-
     mysqli_close($conn);
 }
 ?>
@@ -52,3 +57,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </footer>
 </body>
 </html>
+
