@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result->num_rows > 0) {
             echo "Erreur : ce login est déjà utilisé. Veuillez choisir un autre login.";
         } else {
-            // Insérer l'utilisateur avec le mot de passe haché
+            
             $stmt = $conn->prepare("INSERT INTO utilisateurs (login, password) VALUES (?, ?)");
             $stmt->bind_param("ss", $login, $hashed_password);
 
