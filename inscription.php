@@ -4,28 +4,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
     $confirm_password = $_POST["confirm_password"];
 
-
     if ($password == $confirm_password) {
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $conn = mysqli_connect("localhost", "root", "", "livreor");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
-      
-        
-        $sql = "INSERT INTO utilisateurs (login, password) VALUES ('$login', '$password')";
-        if (mysqli_query($conn, $sql)) {
-            header("Location: connexion.php");
-            exit;
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
-        $sql = "INSERT INTO utilisateurs (login, password) VALUES ('$login', '$hashed_password')";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
+
+        $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE login = ?");
+        $stmt->bind_param("s", $login);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
             echo "Erreur : ce login est déjà utilisé. Veuillez choisir un autre login.";
+        } else {
+            // Insérer l'utilisateur avec le mot de passe haché
+            $stmt = $conn->prepare("INSERT INTO utilisateurs (login, password) VALUES (?, ?)");
+            $stmt->bind_param("ss", $login, $hashed_password);
+
+            if ($stmt->execute()) {
+                header("Location: connexion.php");
+                exit;
+            } else {
+                echo "Erreur : " . $stmt->error;
+            }
         }
 
+        $stmt->close();
         mysqli_close($conn);
     } else {
         echo "Mot de passe et confirmation de mot de passe ne correspondent pas.";
@@ -33,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,22 +47,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <header>
-
+        
     </header>
     <main>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="login">Login</label>
-            <input type="text" id="login" name="login"><br><br>
+            <input type="text" id="login" name="login" required><br><br>
             <label for="password">Password</label>
-            <input type="password" id="password" name="password"><br><br>
+            <input type="password" id="password" name="password" required><br><br>
             <label for="confirm_password">Confirmation Password</label>
-            <input type="password" id="confirm_password" name="confirm_password"><br><br>
+            <input type="password" id="confirm_password" name="confirm_password" required><br><br>
             <input type="submit" value="S'inscrire">
         </form>
         <a href="../livre-or/index.php">Retour à l'accueil</a>
     </main>
-<footer>
-
-</footer>
+    <footer>
+        
+    </footer>
 </body>
 </html>
+

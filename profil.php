@@ -5,46 +5,55 @@ if (!isset($_SESSION["login"])) {
     exit;
 }
 
-
 $conn = mysqli_connect("localhost", "root", "", "livreor");
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-
 $login = $_SESSION["login"];
-$sql = "SELECT * FROM utilisateurs WHERE login='$login'";
-$result = mysqli_query($conn, $sql);
-if (mysqli_num_rows($result) > 0) {
-    $user_data = mysqli_fetch_assoc($result);
+$sql = "SELECT * FROM utilisateurs WHERE login = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $login);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    $user_data = $result->fetch_assoc();
 } else {
     echo "Erreur: utilisateur non trouvé.";
+    $stmt->close();
+    mysqli_close($conn);
+    exit;
 }
-
-mysqli_close($conn);
+$stmt->close();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $login = $_POST["login"];
+    $new_login = $_POST["login"];
     $password = $_POST["password"];
     $confirm_password = $_POST["confirm_password"];
-    $conn = mysqli_connect("localhost", "root", "", "livreor");
-
+    
     if ($password == $confirm_password) {
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         
-        $sql = "UPDATE utilisateurs SET login='$login', password='$password' WHERE login='$login'";
-        if (mysqli_query($conn, $sql)) {
+        $sql = "UPDATE utilisateurs SET login = ?, password = ? WHERE login = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sss", $new_login, $hashed_password, $login);
+        
+        if ($stmt->execute()) {
             echo "Modifications enregistrées.";
+            $_SESSION["login"] = $new_login; 
         } else {
-            echo "Erreur: " . $sql . "<br>" . mysqli_error($conn);
+            echo "Erreur: " . $stmt->error;
         }
+        $stmt->close();
     } else {
         echo "Mot de passe et confirmation de mot de passe ne correspondent pas.";
     }
 }
+mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,19 +61,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <header>
-
+    
 </header>
 <main>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="login">login</label>
-    <input type="text" id="login" name="login" value="<?php echo $user_data["login"]; ?>"><br><br>
+    <label for="login">Login</label>
+    <input type="text" id="login" name="login" value="<?php echo htmlspecialchars($user_data["login"]); ?>"><br><br>
     <label for="password">Password</label>
     <input type="password" id="password" name="password"><br><br>
     <label for="confirm_password">Confirmation Password</label>
     <input type="password" id="confirm_password" name="confirm_password"><br><br>
     <input type="submit" value="Modifier">
 </form>
-        <a href="../index.php">Retour à l'accueil</a>
+<a href="../livre-or/index.php">Retour à l'accueil</a>
 </main>
 <footer>
 
