@@ -1,41 +1,44 @@
 <?php
+session_start();
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "livreor";
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+if ($conn->connect_error) {
+    die("Connexion échouée: " . $conn->connect_error);
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $login = $_POST["login"];
     $password = $_POST["password"];
-
-    $conn = mysqli_connect("localhost", "root", "", "livreor");
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error());
-    }
-
-    $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE login = ?");
-    if ($stmt === false) {
-        die("Erreur de préparation de la requête : " . $conn->error);
-    }
-
-    $stmt->bind_param("s", $login); 
+    $stmt = $conn->prepare("SELECT id, login, password FROM utilisateurs WHERE login = ?");
+    $stmt->bind_param("s", $login);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $hashed_password = $row['password'];
+        $user = $result->fetch_assoc();
 
-        if (password_verify($password, $hashed_password)) {
-            session_start();
-            $_SESSION["login"] = $login;
-            header("Location: profil.php");
-            exit;
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['login'] = $user['login'];
+            header("Location: livre-or.php");
+            exit();
         } else {
-            echo "Erreur de connexion : Mot de passe incorrect.";
+            echo "Mot de passe incorrect.";
         }
     } else {
-        echo "Erreur de connexion : Utilisateur non trouvé.";
+        echo "Utilisateur non trouvé.";
     }
 
     $stmt->close();
-    mysqli_close($conn);
 }
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -47,21 +50,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <header>
+        
     </header>
     <main>
-    <h1>Se connecter</h1>
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <label for="login">Login</label>
-            <input type="text" id="login" name="login" required><br><br>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required><br><br>
+        <h1>Connexion</h1>
+        <form action="connexion.php" method="post">
+            <label for="login">Login:</label>
+            <input type="text" name="login" id="login" required><br><br>
+            <label for="password">Mot de passe:</label>
+            <input type="password" name="password" id="password" required><br><br>
             <input type="submit" value="Se connecter">
         </form>
         <a href="../livre-or/index.php">Retour à l'accueil</a>
     </main>
-    <footer>
-        
-    </footer>
+    <footer></footer>
 </body>
 </html>
 
