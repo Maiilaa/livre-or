@@ -14,7 +14,7 @@
         <form action="commentaire.php" method="post">
             <label for="commentaire"></label>
             <input type="text" name="commentaire">
-            <input type="submit" value="Envoyer">
+            <input type="submit" value="Valider">
 
         </form>
         <a href="../livre-or/index.php">Retour à l'accueil</a>
