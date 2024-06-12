@@ -16,6 +16,7 @@
             <input type="text" name="commentaire">
 
         </form>
+        <a href="../livre-or/index.php">Retour à l'accueil</a>
     </main>
     <footer>
 

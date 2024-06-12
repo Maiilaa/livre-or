@@ -49,6 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <header>
     </header>
     <main>
+    <h1>Se connecter</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="login">Login</label>
             <input type="text" id="login" name="login" required><br><br>

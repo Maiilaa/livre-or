@@ -50,6 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
     </header>
     <main>
+        <h1>Créer un compte</h1>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="login">Login</label>
             <input type="text" id="login" name="login" required><br><br>

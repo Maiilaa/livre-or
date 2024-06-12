@@ -60,23 +60,24 @@ mysqli_close($conn);
     <title>Profil</title>
 </head>
 <body>
-<header>
+    <header>
     
-</header>
-<main>
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-    <label for="login">Login</label>
-    <input type="text" id="login" name="login" value="<?php echo htmlspecialchars($user_data["login"]); ?>"><br><br>
-    <label for="password">Password</label>
-    <input type="password" id="password" name="password"><br><br>
-    <label for="confirm_password">Confirmation Password</label>
-    <input type="password" id="confirm_password" name="confirm_password"><br><br>
-    <input type="submit" value="Modifier">
-</form>
-<a href="../livre-or/index.php">Retour à l'accueil</a>
-</main>
-<footer>
+    </header>
+    <main>
+    <h1>Modifier les informations</h1>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <label for="login">Login</label>
+        <input type="text" id="login" name="login" value="<?php echo htmlspecialchars($user_data["login"]); ?>"><br><br>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"><br><br>
+        <label for="confirm_password">Confirmation Password</label>
+        <input type="password" id="confirm_password" name="confirm_password"><br><br>
+        <input type="submit" value="Modifier">
+    </form>
+    <a href="../livre-or/index.php">Retour à l'accueil</a>
+    </main>
+    <footer>
 
-</footer>
+    </footer>
 </body>
 </html>

@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION["login"])) {
     echo "<p>Vous êtes connecté en tant que " . $_SESSION["login"] . ".<br/> <a href='./profil.php'>Mon profil</a> . <br/> <a href='./deconnexion.php'>Déconnexion</a></p>";
 } else {
-    echo "<p><a href='./inscription.php'>Créer un compte</a>  <a href='./connexion.php'>Se connecter</a></p>";
+    echo "<p><a href='./inscription.php'>Créer un compte</a>  <a href='./connexion.php'>Se connecter</a>  <a href='./profil.php'>Modifier les informations</a>  <a href='./commentaire.php'>Ajouter un commentaire</a> </p>";
 }
 ?>
 <!DOCTYPE html>
