@@ -51,7 +51,7 @@ $conn->close();
 </head>
 <body>
     <header>
-    <a class="retouraccueil" href="../livre-or/index.php"></a>
+        <a class="retouraccueil" href="../livre-or/index.php"></a>
     </header>
     <main>
         <h1>Connexion</h1>
@@ -63,7 +63,9 @@ $conn->close();
             <input type="submit" value="Se connecter">
         </form>
     </main>
-    <footer></footer>
+    <footer>
+        
+    </footer>
 </body>
 </html>
 

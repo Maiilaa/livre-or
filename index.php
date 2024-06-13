@@ -19,7 +19,7 @@ if (isset($_SESSION["login"])) {
 
     </header>
         <main>
-        <a class="bienvenue" href="../livre-or/index.php"><h1>Bienvenue sur mon site</h1></a>
+            <a class="bienvenue" href="../livre-or/index.php"><h1>Bienvenue sur mon site</h1></a>
         </main>
     <footer>
 

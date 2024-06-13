@@ -34,7 +34,6 @@ $result = $conn->query($sql);
     </header>
     <main>
         <h1>Livre d'Or</h1>
-
         <?php
             if ($result->num_rows > 0) {
    
@@ -49,7 +48,6 @@ $result = $conn->query($sql);
                  echo "Aucun commentaire pour le moment.";
             }
         ?>
-
     </main>
 </body>
 </html>

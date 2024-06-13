@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <header>
-    <a class="retouraccueil" href="../livre-or/index.php"></a>
+        <a class="retouraccueil" href="../livre-or/index.php"></a>
     </header>
     <main>
         <h1>Créer un compte</h1>
