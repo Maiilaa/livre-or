@@ -1,12 +1,12 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    background-color:rgb(150, 169, 177);
+    color:#333;
     margin: 0;
     padding: 0;
 }
 header, footer {
-    background-color: #333;
+    background-color: white;
     color: white;
     text-align: center;
     padding: 1rem 0;
@@ -21,15 +21,38 @@ main {
 }
 h1 {
     text-align: center;
-    color: #444;
+    color:  rgb(150, 169, 177);
+    background-color: white;
 }
 p {
     text-align: center;
     font-size: 1.1em;
 }
 a {
-    color: #007BFF;
+    margin-top: 10px;
+    color: white;
     text-decoration: none;
     margin: 0 10px;
 }
 
+
+.retouraccueil {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 50px;
+        height: 50px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5em;
+        text-decoration: none;
+    }
+    .retouraccueil:hover {
+        background-color: #0056b3;
+    }
+   

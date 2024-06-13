@@ -53,16 +53,16 @@ $conn->close();
 </head>
 <body>
     <header>
+        <a class="retouraccueil" href="../livre-or/index.php"></a>
         <p>Vous êtes connecté en tant que <?php echo $_SESSION["login"]; ?>. <a href="deconnexion.php">Déconnexion</a></p>
     </header>
     <main>
         <h1>Ajoutez un commentaire</h1>
         <form action="commentaire.php" method="post">
-            <label for="commentaire">Commentaire :</label>
+            <label for="commentaire">Commentaire </label>
             <input type="text" name="commentaire" id="commentaire" required>
             <input type="submit" value="Valider">
         </form>
-        <a href="../livre-or/index.php">Retour à l'accueil</a>
     </main>
     <footer>
 

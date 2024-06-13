@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <header>
-        
+    <a class="retouraccueil" href="../livre-or/index.php"></a>
     </header>
     <main>
         <h1>Créer un compte</h1>
@@ -61,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" id="confirm_password" name="confirm_password" required><br><br>
             <input type="submit" value="S'inscrire">
         </form>
-        <a href="../livre-or/index.php">Retour à l'accueil</a>
     </main>
     <footer>
         

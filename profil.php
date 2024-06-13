@@ -63,7 +63,7 @@ mysqli_close($conn);
 </head>
 <body>
     <header>
-    
+        <a class="retouraccueil" href="../livre-or/index.php"></a>
     </header>
     <main>
         <h1>Modifier les informations</h1>
@@ -76,7 +76,6 @@ mysqli_close($conn);
             <input type="password" id="confirm_password" name="confirm_password"><br><br>
             <input type="submit" value="Modifier">
         </form>
-        <a href="../livre-or/index.php">Retour à l'accueil</a>
     </main>
     <footer>
 

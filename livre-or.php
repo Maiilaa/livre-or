@@ -30,10 +30,10 @@ $result = $conn->query($sql);
 </head>
 <body>
     <header>
-
+        <a class="retouraccueil" href="../livre-or/index.php"></a>
     </header>
     <main>
-        <h2>Livre d'Or</h2>
+        <h1>Livre d'Or</h1>
 
         <?php
             if ($result->num_rows > 0) {
@@ -49,7 +49,6 @@ $result = $conn->query($sql);
                  echo "Aucun commentaire pour le moment.";
             }
         ?>
-        <a href="../livre-or/index.php">Retour à l'accueil</a>
 
     </main>
 </body>

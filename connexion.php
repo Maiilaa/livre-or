@@ -51,18 +51,17 @@ $conn->close();
 </head>
 <body>
     <header>
-        
+    <a class="retouraccueil" href="../livre-or/index.php"></a>
     </header>
     <main>
         <h1>Connexion</h1>
         <form action="connexion.php" method="post">
-            <label for="login">Login:</label>
+            <label for="login">Login</label>
             <input type="text" name="login" id="login" required><br><br>
-            <label for="password">Mot de passe:</label>
+            <label for="password">Mot de passe</label>
             <input type="password" name="password" id="password" required><br><br>
             <input type="submit" value="Se connecter">
         </form>
-        <a href="../livre-or/index.php">Retour à l'accueil</a>
     </main>
     <footer></footer>
 </body>
