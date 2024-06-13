@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (isset($_SESSION["login"])) {
-    echo "<p>Vous êtes connecté en tant que " . $_SESSION["login"] . ".<br/> <a href='./profil.php'>Mon profil</a> . <br/> <a href='./deconnexion.php'>Déconnexion</a></p>";
+    echo "<p>Vous êtes connecté en tant que " . $_SESSION["login"] . ".<br/> <a href='./profil.php'>Mon profil</a> <br/> <a href='./deconnexion.php'>Déconnexion</a></p>";
 } else {
     echo "<p><a href='./inscription.php'>Créer un compte</a>  <a href='./connexion.php'>Se connecter</a>  <a href='./profil.php'>Modifier les informations</a>  <a href='./commentaire.php'>Ajouter un commentaire</a> <a href='./livre-or.php'>Livre d'Or</a></p>";
 }
@@ -19,7 +19,7 @@ if (isset($_SESSION["login"])) {
 
     </header>
         <main>
-            <h1>Bienvenue sur mon site</h1>
+        <a class="bienvenue" href="../livre-or/index.php"><h1>Bienvenue sur mon site</h1></a>
         </main>
     <footer>
 

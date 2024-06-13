@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             $_SESSION['id'] = $user['id'];
             $_SESSION['login'] = $user['login'];
-            header("Location: livre-or.php");
+            header("Location: commentaire.php");
             exit();
         } else {
             echo "Mot de passe incorrect.";
