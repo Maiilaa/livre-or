@@ -27,10 +27,11 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livre d'Or</title>
     <link rel="stylesheet" href="livre-or.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <a class="retouraccueil" href="../livre-or/index.php"></a>
+        <a class="retouraccueil" href="../livre-or/index.php"><i class="fas fa-home"></i></a>
     </header>
     <main>
         <h1>Livre d'Or</h1>
